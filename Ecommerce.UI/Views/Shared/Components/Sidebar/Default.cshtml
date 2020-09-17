@@ -1,0 +1,35 @@
+﻿@using Ecommerce.Entities 
+@model List<Category>
+
+<div class="col-md-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapsecategory" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapsecategory collapse d-sm-inline-flex">
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-item">
+                           <h5><a href="/products" class="nav-link text-dark">All Products</a></h5>
+                            @foreach (var item in Model)
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Store" asp-action="Index" asp-route-category="@item.Url">@item.CategoryName</a>
+                            }
+                        </li>
+                        @*<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown link
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>*@
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+</div>

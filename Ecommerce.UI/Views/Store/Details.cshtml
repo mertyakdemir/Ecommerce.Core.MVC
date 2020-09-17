@@ -1,0 +1,49 @@
+﻿@using Ecommerce.UI.ViewModel 
+@model ProductCategoryModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<link href="~/css/ProductDetail.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="product-image">
+        <img src="~/Images/@Model.Product.ProductImage" alt="" class="product-pic">
+    </div>
+
+    <div class="product-details">
+        <header>
+            @foreach (var item in Model.Categories)
+            {
+                <a asp-controller="Store" asp-action="Index" asp-route-category="@item.Url" style="color:black">@item.CategoryName |</a>
+            }
+            <hr />
+            <h1 class="title">@Model.Product.ProductName</h1>
+            <div class="price">
+                <span class="current">$ @Model.Product.ProductPrice</span>
+            </div>
+        </header>
+        <article>
+            <h5>Description</h5>
+            <p>@Model.Product.ProductDescription</p>
+        </article>
+        <div class="controls">
+            <div class="size">
+                <h5>size</h5>
+                <a href="#!" class="option">(UK 8)</a>
+            </div>
+            <div class="qty">
+                <h5>qty</h5>
+                <a href="#!" class="option">(1)</a>
+            </div>
+        </div>
+        <div class="shop-cart">
+            <button type="button">
+                <img src="http://co0kie.github.io/codepen/nike-product-page/cart.png" alt="">
+                <span>add to cart</span>
+            </button>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,28 @@
+﻿@model Ecommerce.UI.ViewModel.ProductViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="row index-row">
+    @await Component.InvokeAsync("Sidebar")
+    <div class="col-md-9">
+        <div class="row no-gutters">
+            @foreach (var item in Model.Products)
+            {
+                <div class="card col-md-3" style="width: 18rem; margin:0px 10px 30px 10px;">
+                    <img class="card-img-top" src="~/Images/@item.ProductImage" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Id - @item.ProductName</h5>
+                        <p class="card-text">@item.ProductDescription</p>
+                        <p><bold>@item.ProductPrice</bold></p>
+                        <p>@item.IsOnline</p>
+                        <button class="btn btn-success">@Html.ActionLink("Details","Details","Store", new { id = item.Id }, new { @style = "color:white" })</button>
+                        <button class="btn btn-primary">Add to cart</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
