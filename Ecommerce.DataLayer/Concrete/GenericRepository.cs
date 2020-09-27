@@ -37,7 +37,7 @@ namespace Ecommerce.DataLayer.Concrete
         }
 
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             using var dbContext = new TDbContext();
             dbContext.Entry(entity).State = EntityState.Modified;

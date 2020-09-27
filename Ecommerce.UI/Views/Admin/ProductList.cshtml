@@ -1,0 +1,58 @@
+﻿@using Ecommerce.UI.ViewModel
+@model ProductViewModel
+
+@{
+    ViewData["Title"] = "ProductList";
+}
+    <div class="row">
+
+        <div class="d-flex justify-content-center mb-3" style="width:100%">
+            <a href="/admin/products/create" class="btn btn-success">Create Product</a>
+        </div>
+
+        @if (Model.Products.Count == 0)
+        {
+            <h2>No Products</h2>
+        }
+
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Description</th>
+                        <th scope="col">Product Price</th>
+                        <th scope="col">Product IsOnline</th>
+                        <th scope="col">Product IsHome</th>
+                        <th scope="col">Product Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <th scope="row">@item.Id</th>
+                            <td>@item.ProductName</td>
+                            <td>@Html.Raw(@item.ProductDescription)</td>
+                            <td>@item.ProductPrice</td>
+                            <td>@item.IsOnline</td>
+                            <td>@item.IsMain</td>
+                            <td><img src="~/Images/@item.ProductImage" style="width:100px;" /></td>
+                            <td>
+                                <a href="/admin/products/@item.Id" class="btn btn-primary">Edit</a>
+                            </td>
+                            <td>
+                                <form action="/admin/deleteproduct" method="post">
+                                    <input type="hidden" name="Id" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+

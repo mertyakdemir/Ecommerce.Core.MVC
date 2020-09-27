@@ -1,0 +1,96 @@
+﻿@using Ecommerce.UI.Models
+@model CategoryModel
+@{
+    ViewData["Title"] = "EditCategory";
+}
+
+<h1>Edit Category</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+
+        <form asp-controller="Admin" asp-action="EditCategory" method="post">
+            <input type="hidden" name="Id" value="@Model.CategoryId" />
+            <div class="form-group row">
+                <label asp-for="CategoryName" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="CategoryName" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="CategoryDescription" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <textarea id="editor" asp-for="CategoryDescription" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Url" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="Url" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                    <button type="submit" class="btn btn-primary">Save Category</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="d-flex justify-content-center mb-3" style="width:100%">
+        <a href="/admin/products/create" class="btn btn-success">Create Product</a>
+    </div>
+
+    @if (Model.Products.Count == 0)
+    {
+        <h2>No Products</h2>
+    }
+
+    else
+    {
+          <h2>Products of the category</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Description</th>
+                    <th scope="col">Product Price</th>
+                    <th scope="col">Product IsOnline</th>
+                    <th scope="col">Product IsHome</th>
+                    <th scope="col">Product Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Products)
+                {
+                    <tr>
+                        <th scope="row">@item.Id</th>
+                        <td>@item.ProductName</td>
+                        <td>@item.ProductDescription</td>
+                        <td>@item.ProductPrice</td>
+                        <td>@item.IsOnline</td>
+                        <td>@item.IsMain</td>
+                        <td><img src="~/Images/@item.ProductImage" style="width:100px;" /></td>
+                        <td>
+                            <a href="/admin/products/@item.Id" class="btn btn-primary">Edit</a>
+                        </td>
+                        <td>
+                            <form action="/admin/deletefromcategory" method="post">
+                                <input type="hidden" name="Id" value="@item.Id" />
+                                <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+                                <button type="submit" class="btn btn-danger">Delete from category</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -19,5 +19,11 @@ namespace Ecommerce.DataLayer.Abstract
 
         List<Product> GetSearchResult(string searchtext);
 
+        Product GetOneWithCategories(int id);
+
+        void Update(Product entity, int[] categoryIds);
+
+        void Create(Product entity, int[] categoryIds);
+
     }
 }

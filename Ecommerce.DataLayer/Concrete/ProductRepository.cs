@@ -64,6 +64,63 @@ namespace Ecommerce.DataLayer.Concrete
             return products.ToList();
         }
 
+        public Product GetOneWithCategories(int id)
+        {
+            using var dbContext = new DatabaseContext();
+
+            return dbContext.Products.Where(i => i.Id == id)
+                                     .Include(i => i.ProductCategories)
+                                     .ThenInclude(i => i.Category)
+                                     .FirstOrDefault();
+        }
+
+
+        public void Update(Product model, int[] categoryIds)
+        {
+            using var dbContext = new DatabaseContext();
+
+            var product = dbContext.Products.Include(i => i.ProductCategories).FirstOrDefault(i => i.Id == model.Id);
+
+            if(product != null)
+            {
+                product.ProductName = model.ProductName;
+                product.ProductDescription = model.ProductDescription;
+                product.ProductPrice = model.ProductPrice;
+                product.ProductImage = model.ProductImage;
+                product.IsOnline = model.IsOnline;
+                product.IsMain = model.IsMain;
+                product.ProductCategories = categoryIds.Select(catIds => new ProductCategory()
+                {
+                    CategoryId = catIds,
+                    ProductId = model.Id
+                }).ToList();
+
+                dbContext.SaveChanges();
+            }
+
+        }
+
+        public void Create(Product entity, int[] categoryIds)
+        {
+            using var dbContext = new DatabaseContext();
+
+            var model = new Product()
+            {
+                ProductName = entity.ProductName,
+                ProductDescription = entity.ProductDescription,
+                ProductPrice = entity.ProductPrice,
+                ProductImage = entity.ProductImage,
+                IsOnline = entity.IsOnline,
+                IsMain = entity.IsMain,
+                ProductCategories = categoryIds.Select(catIds => new ProductCategory()
+                {
+                    CategoryId = catIds,
+                }).ToList()
+            };
+            dbContext.Add(model);
+            dbContext.SaveChanges();
+        }
+
         public List<Product> BestSellerProducts()
         {
             throw new NotImplementedException();

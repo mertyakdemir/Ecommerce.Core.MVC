@@ -14,11 +14,17 @@
                 <div class="card col-md-3" style="width: 18rem;">
                     <img class="card-img-top" src="~/Images/@item.ProductImage" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">@item.Id - @item.ProductName</h5>
-                        <p class="card-text">@item.ProductDescription</p>
-                        <p><bold>@item.ProductPrice</bold></p>
-                        <button class="btn btn-success">@Html.ActionLink("Details", "Details", "Store", new { id = item.Id }, new { @style = "color:white" })</button>
-                        <button class="btn btn-primary">Add to cart</button>
+                        <h5 class="card-title">@item.ProductName</h5>
+                        <p><bold>$ @item.ProductPrice</bold></p>
+                        <button class="btn btn-success mb-2">@Html.ActionLink("Details", "Details", "Store", new { id = item.Id }, new { @style = "color:white" })</button>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                                <input type="hidden" name="ProductId" value="@item.Id" />
+                                <input type="hidden" name="quantity" value="1" />
+                                <button type="submit" class="btn btn-primary">Add to cart</button>
+                            </form>
+                        }
                     </div>
                 </div>
             }

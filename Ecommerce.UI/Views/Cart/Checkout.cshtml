@@ -1,0 +1,98 @@
+﻿@using Ecommerce.UI.Models
+@model OrderModel
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h1>Checkout</h1>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <h4 class="mb-3">Order Details</h4>
+        <form asp-controller="Cart" asp-action="Checkout" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input hidden="hidden" name="cartId" value="0" />
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="@Model.FirstName">First Name</label>
+                    <input asp-for="@Model.FirstName" value="" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="@Model.LastName">Last Name</label>
+                    <input asp-for="@Model.LastName" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Address">Address</label>
+                <textarea asp-for="@Model.Address" class="form-control"></textarea>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="@Model.City">City</label>
+                    <input asp-for="@Model.City" value="" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="@Model.Phone">Phone</label>
+                    <input asp-for="@Model.Phone" value="" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="@Model.Email">Email</label>
+                    <input asp-for="@Model.Email" value="" class="form-control" />
+                </div>
+            </div>
+            <hr class="mb-4" />
+           
+            <h4 class="mb-3">Payment</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Name on Credit Card</label>
+                    <input type="text" name="CardName" value="" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Credit Card Number</label>
+                    <input type="text" name="CardNumber" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Month</label>
+                    <input type="text" name="ExpirationMonth" value="" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Year</label>
+                    <input type="text" name="ExpirationYear" value="" class="form-control" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>CVV</label>
+                    <input type="text" name="Cvc" value="" class="form-control" />
+                </div>
+            </div>
+            <hr class="mb-4" />
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Complete Order</button>
+        </form>
+    </div>
+    <div class="col-md-4 mb-4">
+
+        <h4 class="mb-3">
+            <span class="text-muted">Your Cart</span>
+        </h4>
+        <ul class="list-group mb-3">
+            @foreach (var item in Model.CartModel.CartItems)
+            {
+            <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">@item.Name</h6>
+                </div>
+                <span class="text-muted">$ @item.Price</span>
+            </li>
+            }
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Total</span>
+                <strong>$ @Model.CartModel.TotalPrice()</strong>
+            </li>
+
+        </ul>
+
+    </div>
+</div>

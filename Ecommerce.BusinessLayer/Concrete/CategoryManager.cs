@@ -1,5 +1,6 @@
 ﻿using Ecommerce.BusinessLayer.Abstract;
 using Ecommerce.DataLayer.Abstract;
+using Ecommerce.DataLayer.Concrete;
 using Ecommerce.Entities;
 using System;
 using System.Collections.Generic;
@@ -33,12 +34,22 @@ namespace Ecommerce.BusinessLayer.Concrete
 
         public Category GetOne(int id)
         {
-            throw new NotImplementedException();
+            return categoryRepository.GetOne(id);
         }
 
         public void Update(Category entity)
         {
-            throw new NotImplementedException();
+            categoryRepository.Update(entity);
+        }
+
+        public Category GetCategoryWithProducts(int categoryId)
+        {
+            return categoryRepository.GetCategoryWithProducts(categoryId);
+        }
+
+        public void DeleteFromCategory(int Id, int CategoryId)
+        {
+            categoryRepository.DeleteFromCategory(Id, CategoryId);
         }
     }
 }

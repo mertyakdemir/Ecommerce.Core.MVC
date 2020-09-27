@@ -16,5 +16,9 @@ namespace Ecommerce.BusinessLayer.Abstract
         void Update(Category entity);
 
         void Delete(Category entity);
+
+        Category GetCategoryWithProducts(int categoryId);
+
+        void DeleteFromCategory(int Id, int CategoryId);
     }
 }

@@ -1,0 +1,86 @@
+﻿@using Ecommerce.UI.Models
+@using Ecommerce.Entities
+@model ProductModel
+@{
+    ViewData["Title"] = "CreateProduct";
+}
+
+<h1>Create Product</h1>
+<hr />
+
+<form asp-controller="Admin" asp-action="CreateProduct" method="post" enctype="multipart/form-data">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            <div class="form-group row">
+                <label asp-for="ProductName" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="ProductName" value="" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ProductDescription" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <textarea id="editor" asp-for="ProductDescription" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ProductPrice" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="ProductPrice" value="" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ProductImage" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input type="file" name="file" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="IsOnline" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="IsOnline" type="checkbox" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="IsMain" class="col-md-2 col-form-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="IsMain" type="checkbox" class="form-control" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-10 offset-md-2">
+                    <button type="submit" class="btn btn-primary">Save Product</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group row">
+                @foreach (var item in (List<Category>)ViewBag.Categories)
+                {
+                    <div class="custom-control custom-checkbox col-md-12 ml-5">
+                        <input type="checkbox" class="custom-control-input" id="category_@(item.Id)"
+                               name="categoryIds"
+                               value="@item.Id" />
+                        <label class="custom-control-label" for="category_@(item.Id)" style="display:block">@item.CategoryName</label>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<script src="~/js/ckeditor/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('editor');
+</script>

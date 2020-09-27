@@ -13,7 +13,11 @@ namespace Ecommerce.BusinessLayer.Abstract
 
         void Create(Product entity);
 
+        void Create(Product model, int[] categoryIds);
+
         void Update(Product entity);
+
+        void Update(Product model, int[] categoryIds);
 
         void Delete(Product entity);
 
@@ -27,5 +31,6 @@ namespace Ecommerce.BusinessLayer.Abstract
 
         List<Product> GetSearchResult(string searchtext);
 
+        Product GetOneWithCategories(int id);
     }
 }

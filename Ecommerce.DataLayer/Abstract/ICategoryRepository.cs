@@ -7,6 +7,8 @@ namespace Ecommerce.DataLayer.Abstract
 {
     public interface ICategoryRepository : IRepositoryBase<Category>
     {
-        
+        Category GetCategoryWithProducts(int categoryId);
+
+        void DeleteFromCategory(int Id, int CategoryId);
     }
 }

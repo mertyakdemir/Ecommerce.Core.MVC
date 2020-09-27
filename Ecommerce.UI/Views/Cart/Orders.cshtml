@@ -1,0 +1,59 @@
+﻿@using Ecommerce.UI.Models
+@model List<OrderListModel> 
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>Orders</h1>
+
+@foreach (var item in Model)
+{
+    <table class="table table-bordered table-sm mb-3">
+               <thead>
+                   <tr>
+                       <td colspan="2">Order number: @item.OrderNumber</td>
+                       <th>Price</th>
+                       <th>Quantity</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   @foreach (var product in item.OrderItems)
+                   {
+                   <tr>
+                       <td><img src="~/Images/@product.ImageUrl" width="70" /></td>
+                       <td>@product.Name</td>
+                       <td>@product.Price</td>
+                       <td>@product.Quantity</td>
+                   </tr>
+                   }
+               </tbody>
+               <tfoot>
+                   <tr>
+                       <td colspan="2">Customer Name</td>
+                       <td>@item.FirstName @item.LastName</td>
+                       <td rowspan="6">Total: $ @item.TotalPrice()</td>
+                   </tr>
+                   <tr>
+                       <td colspan="2">Adress: </td>
+                       <td>@item.Address</td>
+                   </tr>
+                   <tr>
+                       <td colspan="2">Email: </td>
+                       <td>@item.Email</td>
+                   </tr>
+                   <tr>
+                       <td colspan="2">Phone: </td>
+                       <td>@item.Phone</td>
+                   </tr>
+                   <tr>
+                       <td colspan="2">Order Status: </td>
+                       <td>@item.OrderState</td>
+                   </tr>
+                   <tr>
+                       <td colspan="2">Payment Type: </td>
+                       <td>@item.PaymentType</td>
+                   </tr>
+               </tfoot>
+     </table>
+}
+

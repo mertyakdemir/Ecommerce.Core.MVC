@@ -21,9 +21,19 @@ namespace Ecommerce.BusinessLayer.Concrete
             productRepository.Create(entity);
         }
 
+        public void Create(Product entity, int[] categoryIds)
+        {
+            productRepository.Create(entity, categoryIds);
+        }
+
         public void Update(Product entity)
         {
-            throw new NotImplementedException();
+            productRepository.Update(entity);
+        }
+
+        public void Update(Product entity, int[] categoryIds)
+        {
+            productRepository.Update(entity, categoryIds);
         }
 
         public void Delete(Product entity)
@@ -62,8 +72,13 @@ namespace Ecommerce.BusinessLayer.Concrete
         }
 
         public List<Product> GetSearchResult(string searchtext)
-        {
+        { 
             return productRepository.GetSearchResult(searchtext);
+        }
+
+        public Product GetOneWithCategories(int id)
+        {
+            return productRepository.GetOneWithCategories(id);
         }
     }
 }
