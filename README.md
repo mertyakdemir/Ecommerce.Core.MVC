@@ -1,3 +1,5 @@
+## http://www.ecommercecoremvc.somee.com/
+
 ### Please change the following fields for the project to work local environment.
 
 #### Ecommerce.UI -> Startup
